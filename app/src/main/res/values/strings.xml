@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">silokan project</string>
+
+    <string name="new_business_card">名刺ホルダ作成</string>
+    <string name="card_list">名刺ホルダー</string>
+    <string name="popo">？？？？？？？</string>
+
+    <!--BusinessCardActivityで使う単語-->
+    <string name="business_card_list">登録済み名刺一覧</string>
+</resources>
