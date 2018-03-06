@@ -94,13 +94,18 @@
         android:orientation="horizontal"
         android:layout_margin="10dp"
         android:layout_gravity="center_horizontal">
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="141dp"
-        android:layout_height="wrap_content"
-        android:text="更新" />
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/insert"
+            android:layout_width="141dp"
+            android:layout_height="wrap_content"
+            android:text="追加" />
+        <Button
+            android:id="@+id/update"
+            android:layout_width="141dp"
+            android:layout_height="wrap_content"
+            android:text="更新" />
+        <Button
+            android:id="@+id/delete"
             android:layout_width="141dp"
             android:layout_height="wrap_content"
             android:text="取消" />
