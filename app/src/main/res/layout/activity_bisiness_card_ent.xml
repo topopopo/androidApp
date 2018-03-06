@@ -94,19 +94,20 @@
         android:orientation="horizontal"
         android:layout_margin="10dp"
         android:layout_gravity="center_horizontal">
+
         <Button
             android:id="@+id/insert"
-            android:layout_width="141dp"
-            android:layout_height="wrap_content"
+            android:layout_width="103dp"
+            android:layout_height="match_parent"
             android:text="追加" />
         <Button
             android:id="@+id/update"
-            android:layout_width="141dp"
+            android:layout_width="103dp"
             android:layout_height="wrap_content"
             android:text="更新" />
         <Button
             android:id="@+id/delete"
-            android:layout_width="141dp"
+            android:layout_width="103dp"
             android:layout_height="wrap_content"
             android:text="取消" />
      </LinearLayout>
