@@ -11,11 +11,16 @@ import android.widget.Toast;
 
 public class BusinessCardEntActivity extends AppCompatActivity implements View.OnClickListener{
     private BizCardDb MSSQLhelper = null;
-    private EditText name;
-    public static final String Id = "Id";
+    private EditText user;
+    private EditText company;
+    private EditText dept;
+    private EditText tel;
+    private EditText mail;
+    private EditText rmrks;
+    //public static final String Id = "Id";
     public static final String Co_Name = "Co_Name";
-    public static final String User_name = "User_name";
-    public static final String Position = "Position";
+    public static final String Dept_Name = "Dept_Name";
+    public static final String User_name = "User_Name";
     public static final String Tel  = "Tel";
     public static final String Mail = "Mail";
     public static final String Rmrks = "Rmrks";
@@ -31,7 +36,12 @@ public class BusinessCardEntActivity extends AppCompatActivity implements View.O
         Button upd = (Button) findViewById(R.id.update);
         upd.setOnClickListener(this);
 
-        name = (EditText) findViewById(R.id.editText1);
+        company = (EditText) findViewById(R.id.editText1);
+        dept = (EditText) findViewById(R.id.editText2);
+        user = (EditText) findViewById(R.id.editText3);
+        tel = (EditText) findViewById(R.id.editText4);
+        mail = (EditText) findViewById(R.id.editText5);
+        rmrks = (EditText) findViewById(R.id.editText6);
 
         MSSQLhelper = new BizCardDb(BusinessCardEntActivity.this);
 
@@ -40,26 +50,31 @@ public class BusinessCardEntActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.insert://登録
-                String user = name.getText().toString();
-                enter("2","co",user,"president","080","gmail","rmrks");
+                String Co = company.getText().toString();
+                String Dept = dept.getText().toString();
+                String User = user.getText().toString();
+                String Tel = tel.getText().toString();
+                String Mail = mail.getText().toString();
+                String Rmrks = rmrks.getText().toString();
+                enter(Co,Dept,User,Tel,Mail,Rmrks);
                 break;
 
             /*case R.id.search://検索
                 Intent intent = new Intent(getApplicationContext(), MemosearchActivity.class);//検索画面に遷移します。
+                //値を引き渡す。
                 intent.putExtra("検索","1");
                 startActivity(intent);
                 break;*/
         }
     }
-    private void enter(String id,String co,String user,String position,String tel,String mail,String rmrks) {
+    private void enter(String co,String dept,String user,String tel,String mail,String rmrks) {
 
         SQLiteDatabase db = MSSQLhelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();     // ContentValuesでデータを設定していく
-        values.put(Id, id);
         values.put(Co_Name, co);
+        values.put(Dept_Name, dept);
         values.put(User_name, user);
-        values.put(Position, position);
         values.put(Tel, tel);
         values.put(Mail, mail);
         values.put(Rmrks, rmrks);

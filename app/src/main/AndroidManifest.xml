@@ -17,6 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".BusinessCardActivity"></activity>
+        <activity
+            android:name=".BusinessCardEntActivity"
+            android:label="名刺情報登録"
+            android:windowSoftInputMode="stateAlwaysHidden">
+        </activity>
     </application>
 
 </manifest>
