@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BusinessCardEntActivity">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -54,7 +60,7 @@
             android:layout_width="69dp"
             android:layout_height="27dp"
             android:layout_marginTop="8dp"
-            android:text="名前"
+            android:text="部署"
             android:textSize="40px"
             tools:layout_editor_absoluteX="16dp" />
 
@@ -64,7 +70,7 @@
             android:layout_height="47dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:text="Name"
+            android:text="Dept"
             tools:layout_editor_absoluteX="16dp" />
 
         <TextView
@@ -72,9 +78,10 @@
             android:layout_width="94dp"
             android:layout_height="27dp"
             android:layout_marginTop="8dp"
-            android:text="電話番号"
+            android:text="名前"
             android:textSize="40px"
             tools:layout_editor_absoluteX="16dp" />
+
 
         <EditText
             android:id="@+id/editText3"
@@ -82,7 +89,60 @@
             android:layout_height="47dp"
             android:layout_marginTop="8dp"
             android:ems="10"
+            android:text="Name"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="94dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="8dp"
+            android:text="電話番号"
+            android:textSize="40px"
+            tools:layout_editor_absoluteX="16dp" />
+
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="236dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
             android:text="TEL"
+            tools:layout_editor_absoluteX="16dp" />
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="94dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="8dp"
+            android:text="メールアドレス"
+            android:textSize="40px"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <EditText
+            android:id="@+id/editText5"
+            android:layout_width="236dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:text="Mail"
+            tools:layout_editor_absoluteX="16dp" />
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="94dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="8dp"
+            android:text="備考"
+            android:textSize="40px"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <EditText
+            android:id="@+id/editText6"
+            android:layout_width="236dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:text=""
             tools:layout_editor_absoluteX="16dp" />
     </LinearLayout>
     <LinearLayout
@@ -112,3 +172,4 @@
             android:text="取消" />
      </LinearLayout>
 </LinearLayout>
+</ScrollView>

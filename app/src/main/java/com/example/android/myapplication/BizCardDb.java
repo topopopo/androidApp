@@ -54,9 +54,9 @@ public class BizCardDb extends SQLiteOpenHelper {
         // ここでDBの作成、初期データの投入を行う
         db.execSQL("CREATE TABLE BizCard (" +
                 "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "Co_Name TEXT," +
-                "User_name TEXT," +
-                "Position TEXT," +
+                "Co_Name TEXT ," +
+                "User_Name TEXT ," +
+                "Dept_Name TEXT," +
                 "Tel TEXT," +
                 "Mail TEXT," +
                 "Rmrks TEXT)");
