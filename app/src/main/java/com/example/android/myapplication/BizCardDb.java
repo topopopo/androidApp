@@ -123,6 +123,19 @@ public class BizCardDb {
         return db.query(DB_TABLE, columns, column + " like ?", name, null, null, null);
     }
 
+    public Cursor selectDB(String[] pram) {
+        String sqlStr ="select Id" +
+                "               ,Co_Name" +
+                "               ,User_Name" +
+                "               ,Dept_Name" +
+                "               ,Tel" +
+                "               ,Mail" +
+                "               ,Rmrks" +
+                        "from '%DB_TABLE%' " +
+                        "where Id" ;
+        return db.rawQuery(sqlStr,pram);
+    }
+
     /**
      * DBのレコードを全削除
      * allDelete()
