@@ -131,8 +131,7 @@ public class BizCardDb {
                 "               ,Tel" +
                 "               ,Mail" +
                 "               ,Rmrks" +
-                        "from '%DB_TABLE%' " +
-                        "where Id" ;
+                        " from  BizCard";
         return db.rawQuery(sqlStr,pram);
     }
 

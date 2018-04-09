@@ -1,63 +1,55 @@
 package com.example.android.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private BizCardDb dbAdapter;                // DBAdapter
-    private ArrayAdapter<String> adapter;       // ArrayAdapter
-    private ArrayList<String> items;            // ArrayList
+    private MyBaseAdapter myBaseAdapter;
 
-    private ListView mListView01;        // ListView
+    private ListView mListView01;
+    private List<MyListItem> items;
+    protected MyListItem myListItem;
+
+
+    private String[] where = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Button ent = (Button) findViewById(R.id.button1);
         ent.setOnClickListener(this);
 
         BizCardDb dbAdapter = new BizCardDb(this);
-        dbAdapter.openDB();     // DBの読み込み(読み書きの方)
-
-        findViews();           // 各部品の結び付け
 
         // ArrayListを生成
         items = new ArrayList<>();
+        // MyBaseAdapterのコンストラクタ呼び出し(myBaseAdapterのオブジェクト生成)
+        myBaseAdapter = new MyBaseAdapter(this, items);
 
-        // DBのデータを取得
-        String[] columns = {BizCardDb.COL_USER_NAME};     // DBのカラム：品名
-        Cursor c = dbAdapter.getDB(columns);
-
-        if (c.moveToFirst()) {
-            do {
-                items.add(c.getString(0));
-            } while (c.moveToNext());
-        }
-        c.close();
-        dbAdapter.closeDB();    // DBを閉じる
-
-        // ArrayAdapterのコンストラクタ
-        // 第1引数：Context
-        // 第2引数：リソースとして登録されたTextViewに対するリソースID 今回は元々用意されている定義済みのレイアウトファイルのID
-        // 第3引数：一覧させたいデータの配列
-        adapter = new ArrayAdapter<>
-                (this, android.R.layout.simple_list_item_1, items);
-
-        mListView01.setAdapter(adapter);     //ListViewにアダプターをセット(=表示)
-
-        // ArrayAdapterに対してListViewのリスト(items)の更新
-        adapter.notifyDataSetChanged();
+        findViews();           // 各部品の結び付け
+        loadList();            //リストを格納
 
 
 
@@ -78,6 +70,129 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(getApplicationContext(), BusinessCardEntActivity.class);//検索画面に遷移
                 startActivity(intent);
                 break;
+        }
+    }
+
+    private void loadList() {
+        BizCardDb dbAdapter = new BizCardDb(this);
+        dbAdapter.openDB();     // DBの読み込み(読み書きの方)
+
+
+        Cursor c = dbAdapter.getDB(where);
+
+
+
+        if (c.moveToFirst()) {
+            do {
+                // MyListItemのコンストラクタ呼び出し(myListItemのオブジェクト生成)
+                myListItem = new MyListItem(
+                        c.getInt(c.getColumnIndex("Id")),
+                        c.getString(c.getColumnIndex("Co_Name")),
+                        c.getString(c.getColumnIndex("User_Name")),
+                        c.getString(c.getColumnIndex("Dept_Name")),
+                        c.getString(c.getColumnIndex("Tel")),
+                        c.getString(c.getColumnIndex("Mail")),
+                        c.getString(c.getColumnIndex("Rmrks")));
+
+                items.add(myListItem);          // 取得した要素をitemsに追加
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        dbAdapter.closeDB();                    // DBを閉じる
+        mListView01.setAdapter(myBaseAdapter);  // ListViewにmyBaseAdapterをセット
+        myBaseAdapter.notifyDataSetChanged();   // Viewの更新
+    }
+
+    public class MyBaseAdapter extends BaseAdapter {
+        private Context context;
+        private List<MyListItem> items;
+
+        // 毎回findViewByIdをする事なく、高速化が出来るようするholderクラス
+        private class ViewHolder {
+            TextView textView2;
+            TextView textView4;
+            TextView textView6;
+            TextView textView8;
+            TextView textView10;
+            TextView textView12;
+        }
+
+        // コンストラクタの生成
+        public MyBaseAdapter(Context context, List<MyListItem> items) {
+            this.context = context;
+            this.items = items;
+        }
+
+        // Listの要素数を返す
+        @Override
+        public int getCount() {
+
+            return items.size();
+        }
+
+        // indexやオブジェクトを返す
+        @Override
+        public Object getItem(int position) {
+
+            return items.get(position);
+        }
+
+        // IDを他のindexに返す
+        @Override
+        public long getItemId(int position) {
+
+            return position;
+        }
+
+        // 新しいデータが表示されるタイミングで呼び出される
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            View view = convertView;
+            ViewHolder holder;
+
+            // データを取得
+            myListItem = items.get(position);
+
+
+            if (view == null) {
+                LayoutInflater inflater =
+                        (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                view = inflater.inflate(R.layout.item_detail_row, parent, false);
+
+                TextView company = (TextView) findViewById(R.id.textView2);
+                TextView dept = (TextView) findViewById(R.id.textView4);
+                TextView user = (TextView) findViewById(R.id.textView6);
+                TextView tel = (TextView) findViewById(R.id.textView8);
+                TextView mail = (TextView) findViewById(R.id.textView10);
+                TextView rmrks = (TextView) findViewById(R.id.textView12);
+
+                // holderにviewを持たせておく
+                holder = new ViewHolder();
+                holder.textView2 = company;
+                holder.textView4 = dept;
+                holder.textView6 = user;
+                holder.textView8 = tel;
+                holder.textView10 = mail;
+                holder.textView12 = rmrks;
+                view.setTag(holder);
+
+            } else {
+                // 初めて表示されるときにつけておいたtagを元にviewを取得する
+                holder = (ViewHolder) view.getTag();
+            }
+
+            // 取得した各データを各TextViewにセット
+            holder.textView2.setText(myListItem.getCo_Name());
+            holder.textView4.setText(myListItem.getUser_Name());
+            holder.textView6.setText(myListItem.getDept_Name());
+            holder.textView8.setText(myListItem.getTel());
+            holder.textView10.setText(myListItem.getMail());
+            holder.textView12.setText(myListItem.getRmrks());
+
+
+            return view;
         }
     }
 }
