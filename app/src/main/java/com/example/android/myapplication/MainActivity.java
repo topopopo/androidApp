@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void loadList() {
         BizCardDb dbAdapter = new BizCardDb(this);
+
+        items.clear();
         dbAdapter.openDB();     // DBの読み込み(読み書きの方)
 
 
@@ -86,13 +89,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             do {
                 // MyListItemのコンストラクタ呼び出し(myListItemのオブジェクト生成)
                 myListItem = new MyListItem(
-                        c.getInt(c.getColumnIndex("Id")),
-                        c.getString(c.getColumnIndex("Co_Name")),
-                        c.getString(c.getColumnIndex("User_Name")),
-                        c.getString(c.getColumnIndex("Dept_Name")),
-                        c.getString(c.getColumnIndex("Tel")),
-                        c.getString(c.getColumnIndex("Mail")),
-                        c.getString(c.getColumnIndex("Rmrks")));
+
+                        c.getInt(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6));
+                //Toast.makeText(this, (String.valueOf(c.getInt(0))), Toast.LENGTH_SHORT).show();
+                Log.d("取得したCursor(ID):", String.valueOf(c.getInt(0)));
+                Log.d("取得したCursor(品名):", c.getString(1));
+                         //c.getInt(c.getColumnIndex("Id")),
+                        //c.getString(c.getColumnIndex("Co_Name")),
+                        //c.getString(c.getColumnIndex("User_Name")),
+                        //c.getString(c.getColumnIndex("Dept_Name")),
+                        //c.getString(c.getColumnIndex("Tel")),
+                        //c.getString(c.getColumnIndex("Mail")),
+                        //c.getString(c.getColumnIndex("Rmrks")));
 
                 items.add(myListItem);          // 取得した要素をitemsに追加
 
@@ -114,8 +128,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             TextView textView4;
             TextView textView6;
             TextView textView8;
-            TextView textView10;
-            TextView textView12;
+            //TextView textView10;
+            //TextView textView12;
         }
 
         // コンストラクタの生成
@@ -149,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
+
             View view = convertView;
             ViewHolder holder;
 
@@ -156,26 +171,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             myListItem = items.get(position);
 
 
+
+
             if (view == null) {
                 LayoutInflater inflater =
                         (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 view = inflater.inflate(R.layout.item_detail_row, parent, false);
 
-                TextView company = (TextView) findViewById(R.id.textView2);
-                TextView dept = (TextView) findViewById(R.id.textView4);
-                TextView user = (TextView) findViewById(R.id.textView6);
-                TextView tel = (TextView) findViewById(R.id.textView8);
-                TextView mail = (TextView) findViewById(R.id.textView10);
-                TextView rmrks = (TextView) findViewById(R.id.textView12);
+                TextView textView2 = (TextView) findViewById(R.id.textView2);
+                TextView textView4 = (TextView) findViewById(R.id.textView4);
+                TextView textView6 = (TextView) findViewById(R.id.textView6);
+                TextView textView8 = (TextView) findViewById(R.id.textView8);
+                //TextView textView10 = (TextView) findViewById(R.id.textView10);
+                //TextView textView12 = (TextView) findViewById(R.id.textView12);
 
                 // holderにviewを持たせておく
                 holder = new ViewHolder();
-                holder.textView2 = company;
-                holder.textView4 = dept;
-                holder.textView6 = user;
-                holder.textView8 = tel;
-                holder.textView10 = mail;
-                holder.textView12 = rmrks;
+                holder.textView2 = textView2;
+                holder.textView4 = textView4;
+                holder.textView6 = textView6;
+                holder.textView8 = textView8;
+                //holder.textView10 = textView10;
+                //holder.textView12 = textView12;
                 view.setTag(holder);
 
             } else {
@@ -183,13 +200,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 holder = (ViewHolder) view.getTag();
             }
 
+
+
             // 取得した各データを各TextViewにセット
             holder.textView2.setText(myListItem.getCo_Name());
             holder.textView4.setText(myListItem.getUser_Name());
             holder.textView6.setText(myListItem.getDept_Name());
             holder.textView8.setText(myListItem.getTel());
-            holder.textView10.setText(myListItem.getMail());
-            holder.textView12.setText(myListItem.getRmrks());
+            //holder.textView10.setText(myListItem.getMail());
+            //holder.textView12.setText(myListItem.getRmrks());
 
 
             return view;
