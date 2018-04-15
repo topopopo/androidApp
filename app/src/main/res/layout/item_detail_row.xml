@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="4dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="4dp">
+
+    <!-- 名前 -->
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- タイトル：会社名 -->
+        <TextView
+            android:id="@+id/title_textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="会社"
+            android:textSize="14sp" />
+
+        <!-- データ表示用：会社名 -->
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <!-- タイトル：部門名 -->
+        <TextView
+            android:id="@+id/title_textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="部門名"
+            android:textSize="14sp" />
+
+        <!-- データ表示用：部門名 -->
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <!-- タイトル：TEL -->
+        <TextView
+            android:id="@+id/title_textView8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="TEL"
+            android:textSize="14sp" />
+
+        <!-- データ表示用：TEL -->
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <!-- データ表示用：Mail　非表示
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:visibility="gone" />-->
+
+        <!-- データ表示用：備考 　非表示
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:textColor="#000000"
+            android:visibility="gone"
+            android:textSize="14sp" />-->
+
+    </LinearLayout>
+</LinearLayout>

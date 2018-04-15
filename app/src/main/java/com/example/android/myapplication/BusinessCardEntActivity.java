@@ -17,13 +17,7 @@ public class BusinessCardEntActivity extends AppCompatActivity implements View.O
     private EditText tel;
     private EditText mail;
     private EditText rmrks;
-    //public static final String Id = "Id";
-    public static final String Co_Name = "Co_Name";
-    public static final String Dept_Name = "Dept_Name";
-    public static final String User_name = "User_Name";
-    public static final String Tel  = "Tel";
-    public static final String Mail = "Mail";
-    public static final String Rmrks = "Rmrks";
+    long rt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +50,18 @@ public class BusinessCardEntActivity extends AppCompatActivity implements View.O
                 String Tel = tel.getText().toString();
                 String Mail = mail.getText().toString();
                 String Rmrks = rmrks.getText().toString();
-                enter(Co,Dept,User,Tel,Mail,Rmrks);
-                break;
+
+                BizCardDb dbAdapter = new BizCardDb(this);
+                dbAdapter.openDB();                               // DBの読み書き
+                rt = dbAdapter.saveDB(Co,Dept,User,Tel,Mail,Rmrks);   // DBに登録
+                dbAdapter.closeDB();
+
+            if(0 < rt) {
+                Toast.makeText(this, "追加できました", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "追加できませんでした", Toast.LENGTH_LONG).show();
+              }
+            break;
 
             /*case R.id.search://検索
                 Intent intent = new Intent(getApplicationContext(), MemosearchActivity.class);//検索画面に遷移します。
@@ -67,28 +71,5 @@ public class BusinessCardEntActivity extends AppCompatActivity implements View.O
                 break;*/
         }
     }
-    private void enter(String co,String dept,String user,String tel,String mail,String rmrks) {
 
-        SQLiteDatabase db = MSSQLhelper.getWritableDatabase();
-
-        ContentValues values = new ContentValues();     // ContentValuesでデータを設定していく
-        values.put(Co_Name, co);
-        values.put(Dept_Name, dept);
-        values.put(User_name, user);
-        values.put(Tel, tel);
-        values.put(Mail, mail);
-        values.put(Rmrks, rmrks);
-
-        long rt = db.insert("BizCard", null, values);
-
-        db.close();
-
-        if (0 < rt) {
-            Toast.makeText(this, "追加できました", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "追加できませんでした", Toast.LENGTH_LONG).show();
-
-        }
-
-    }
 }
