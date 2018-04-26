@@ -198,8 +198,6 @@ public class BizCardDb {
                     "Tel TEXT," +
                     "Mail TEXT," +
                     "Rmrks TEXT)");
-
-
         }
 
         @Override

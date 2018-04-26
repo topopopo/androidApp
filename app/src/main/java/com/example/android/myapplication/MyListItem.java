@@ -41,11 +41,10 @@ public class MyListItem {
         return Co_Name;
     }
 
-
     public String getUser_Name() {
+
         return User_Name;
     }
-
 
     public String getDept_Name() {
         return Dept_Name;

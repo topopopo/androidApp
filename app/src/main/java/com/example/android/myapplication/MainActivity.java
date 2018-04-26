@@ -5,13 +5,14 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ListView mListView01;
     private List<MyListItem> items;
@@ -36,6 +37,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViews();           // 各部品の結び付け
         loadList();            //リストを格納
 
+
+        mListView01.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                // 選択された項目
+                ListView list = (ListView) parent;
+                MyListItem ItemStr = (MyListItem) list.getItemAtPosition(position);
+
+                String Co = ItemStr.Co_Name;
+
+                // 第2引数は適宜
+                Intent intent = new Intent(getApplicationContext(), BusinessCardActivity.class);
+                intent.putExtra("Co_Name",Co);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -43,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * findViews()
      */
     private void findViews() {
-               //mButton02AllDelete = (Button) findViewById(R.id.button02AllDelete);         // 全削除ボタン
+        //mButton02AllDelete = (Button) findViewById(R.id.button02AllDelete);         // 全削除ボタン
     }
 
     public void onClick(View v) {
@@ -95,5 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        ItemListAdapter adapter = new ItemListAdapter(this, 0,items);
         mListView01.setAdapter(adapter);  // ListViewのRowにをセット
     }
+
 
 }
