@@ -29,8 +29,8 @@ public class ItemListAdapter extends ArrayAdapter<MyListItem> {
         this.mtextView4 = (TextView) v.findViewById(R.id.textView4);
         this.mtextView6 = (TextView) v.findViewById(R.id.textView6);
         this.mtextView8 = (TextView) v.findViewById(R.id.textView8);
-        this.mtextView10 = (TextView) v.findViewById(R.id.textView10);
-        this.mtextView12 = (TextView) v.findViewById(R.id.textView12);
+        //this.mtextView10 = (TextView) v.findViewById(R.id.textView10);
+        //this.mtextView12 = (TextView) v.findViewById(R.id.textView12);
     }
 }
         private LayoutInflater layoutInflater;
@@ -60,14 +60,15 @@ public class ItemListAdapter extends ArrayAdapter<MyListItem> {
 
             MyListItem ItemPosition = getItem(position);
             // 取得した各データを各TextViewにセット
-            holder.mtextView2.setText(ItemPosition.getCo_Name());
+            holder.mtextView6.setText(ItemPosition.getCo_Name());
             holder.mtextView4.setText(ItemPosition.getUser_Name());
-            holder.mtextView6.setText(ItemPosition.getDept_Name());
+            holder.mtextView2.setText(ItemPosition.getDept_Name());
             holder.mtextView8.setText(ItemPosition.getTel());
-            holder.mtextView10.setText(ItemPosition.getMail());
-            holder.mtextView12.setText(ItemPosition.getRmrks());
+            // holder.mtextView10.setText(ItemPosition.getMail());
+            // holder.mtextView12.setText(ItemPosition.getRmrks());
 
 
             return convertView; // Viewを返す
         }
+
 }

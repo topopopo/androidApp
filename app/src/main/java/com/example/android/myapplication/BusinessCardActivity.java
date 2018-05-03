@@ -1,25 +1,27 @@
 package com.example.android.myapplication;
 
-import android.content.Context;
-import android.database.Cursor;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BusinessCardActivity extends AppCompatActivity {
 
+    private String aCompany;
 
+    private TextView company;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_card);
 
+        company = (TextView) findViewById(R.id.textView2);
+
+        Intent intent = getIntent();
+        aCompany = intent.getStringExtra("Co_Name");
+
+        this.company.setText(aCompany);
 
     }
 
